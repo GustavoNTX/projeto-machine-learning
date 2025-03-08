@@ -1,35 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import { trainAndEvaluate, predictCategory } from "./ml/classifier";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [speed, setSpeed] = useState(5);
+  const [strength, setStrength] = useState(5);
+  const [endurance, setEndurance] = useState(5);
+  const [prediction, setPrediction] = useState<string | null>(null);
+  const [accuracy, setAccuracy] = useState<string | null>(null);
+
+  const handleTrain = async () => {
+    const result = await trainAndEvaluate();
+    setAccuracy(result);
+  };
+
+  const handlePredict = async () => {
+    const result = await predictCategory(speed, strength, endurance);
+    setPrediction(result);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div style={{ padding: "20px" }}>
+      <h1>Classificação de Atletas (ML)</h1>
+      <button onClick={handleTrain}>Treinar Modelo e Avaliar Precisão</button>
+
+      {accuracy && <h3>Precisão do Modelo: {accuracy}</h3>}
+
+      <h2>Testar Novo Atleta</h2>
+      <label>Velocidade: <input type="number" value={speed} onChange={e => setSpeed(Number(e.target.value))} /></label>
+      <br />
+      <label>Força: <input type="number" value={strength} onChange={e => setStrength(Number(e.target.value))} /></label>
+      <br />
+      <label>Resistência: <input type="number" value={endurance} onChange={e => setEndurance(Number(e.target.value))} /></label>
+      <br />
+      <button onClick={handlePredict}>Classificar</button>
+
+      {prediction && <h3>Categoria Prevista: {prediction}</h3>}
+    </div>
+  );
 }
 
-export default App
+export default App;
