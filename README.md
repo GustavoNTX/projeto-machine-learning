@@ -1,54 +1,55 @@
-# React + TypeScript + Vite
+Classificação de Atletas com Machine Learning
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Introdução
 
-Currently, two official plugins are available:
+Em um mundo onde a tecnologia se tornou essencial para o aprimoramento esportivo, cientistas desenvolveram um sistema baseado em inteligência artificial para classificar atletas com base no seu treinamento e desempenho.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Esse sistema utiliza dois tipos de aprendizado de máquina:
 
-## Expanding the ESLint configuration
+Aprendizado Não Supervisionado: Para agrupar atletas automaticamente sem rótulos, analisando suas características e formando categorias naturais.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Aprendizado Supervisionado: Para criar um modelo que prevê a categoria de um novo atleta com base em seu histórico de desempenho.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+Cenário Fictício
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Em uma academia de elite, atletas são monitorados por sensores que coletam dados sobre:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Velocidade (m/s)
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+Resistência (minutos de esforço contínuo)
+
+Força (peso máximo levantado em kg)
+
+Explosão (tempo de reação em segundos)
+
+Flexibilidade (alcance em cm)
+
+O objetivo é classificar automaticamente esses atletas em diferentes categorias, como:
+
+Velocistas
+
+Maratonistas
+
+Levantadores de Peso
+
+Ginastas
+
+Triatletas
+
+Metodologia
+
+1. Agrupamento Não Supervisionado (K-Means)
+
+Primeiramente, utilizamos o algoritmo K-Means para detectar padrões naturais nos dados dos atletas. Esse modelo analisará os atributos físicos e distribuirá os atletas em grupos sem rótulos pré-definidos.
+
+2. Aprendizado Supervisionado (Regressão Linear)
+
+Após definir os grupos, treinamos um modelo de regressão linear para prever a categoria de um novo atleta com base em seus dados. Testamos diferentes equações para garantir a melhor precisão.
+
+3. Testes e Comparação de Modelos
+
+Verificamos se os agrupamentos fazem sentido através de visualizações gráficas.
+
+Ajustamos hiperparâmetros do K-Means para refinar os resultados.
+
+Analisamos a precisão da regressão linear para prever corretamente novos atletas.
