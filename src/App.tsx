@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { trainAndEvaluate, predictCategory } from "./ml/classifier";
+import { trainModel, predictCategory } from "./ml/classification";
+import ClusterGraph from "./components/ClusterGraph";
 
 function App() {
   const [speed, setSpeed] = useState(5);
@@ -9,7 +10,7 @@ function App() {
   const [accuracy, setAccuracy] = useState<string | null>(null);
 
   const handleTrain = async () => {
-    const result = await trainAndEvaluate();
+    const result = await trainModel();
     setAccuracy(result);
   };
 
@@ -22,7 +23,6 @@ function App() {
     <div style={{ padding: "20px" }}>
       <h1>Classificação de Atletas (ML)</h1>
       <button onClick={handleTrain}>Treinar Modelo e Avaliar Precisão</button>
-
       {accuracy && <h3>Precisão do Modelo: {accuracy}</h3>}
 
       <h2>Testar Novo Atleta</h2>
@@ -33,8 +33,9 @@ function App() {
       <label>Resistência: <input type="number" value={endurance} onChange={e => setEndurance(Number(e.target.value))} /></label>
       <br />
       <button onClick={handlePredict}>Classificar</button>
-
       {prediction && <h3>Categoria Prevista: {prediction}</h3>}
+
+      <ClusterGraph />
     </div>
   );
 }

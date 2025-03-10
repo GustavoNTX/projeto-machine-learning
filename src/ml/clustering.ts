@@ -19,4 +19,9 @@ const clusteredAthletes = athletes.map((athlete, index) => ({
 // Exibir os resultados no console
 console.log("Atletas agrupados:", clusteredAthletes);
 
+// Opcional: Visualização (se você estiver usando uma biblioteca como o D3.js ou outra)
+clusteredAthletes.forEach((athlete) => {
+    console.log(`Atleta: ${athlete.category} - Grupo: ${athlete.cluster}`);
+});
+
 export default clusteredAthletes;
